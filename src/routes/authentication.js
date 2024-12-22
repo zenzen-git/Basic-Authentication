@@ -20,8 +20,26 @@ AuthRouter.post('/login', async (req, res) => {
         if(!matchPassword){
             return res.status(401).json({ error: 'Authentication failed' });
         }
-        const token = jwt.sign({ userId: 'SampleUserId', email}, process.env.SECRET_KEY, { expiresIn: '1h' });
-        res.status(200).json({ token });
+
+        const accessToken = jwt.sign({ userId: 'SampleUserId', email}, process.env.SECRET_KEY, { expiresIn: '1h' });
+        const refreshToken = jwt.sign({ userId: 'SampleUserId', email}, process.env.REFRESH_TOKEN_KEY, { expiresIn: '1d' });
+
+        res.cookie('access_token', accessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 15 * 60 * 1000
+        });
+
+        res.cookie('refreh_token', refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
+
+        res.status(200).json({ 
+            message: 'Login Success',
+            user: { userId: 'sampleUserId' }
+        });
     } catch(err){
         res.status(500).json({ error: 'Login failed' })
     }
