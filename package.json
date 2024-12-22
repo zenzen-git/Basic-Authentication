@@ -1,0 +1,30 @@
+{
+  "name": "authentication",
+  "version": "1.0.0",
+  "description": "Authentication foundation using express and react",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env --watch src/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zenzen-git/Basic-Authentication.git"
+  },
+  "keywords": [
+    "express",
+    "authentication",
+    "auth",
+    "js"
+  ],
+  "author": "Carl Bajo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zenzen-git/Basic-Authentication/issues"
+  },
+  "homepage": "https://github.com/zenzen-git/Basic-Authentication#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
